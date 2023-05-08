@@ -1,0 +1,11 @@
+
+---
+- name: Install Git on remote server
+  hosts: ec2-204-236-209-242.compute-1.amazonaws.com
+  become: true
+  tasks:
+    - name: Install Git
+      yum:
+        name: git
+        state: present
+
