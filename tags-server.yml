@@ -1,0 +1,40 @@
+- name: Configure server
+  hosts: ec2-204-236-209-242.compute-1.amazonaws.com
+  become: true
+  tasks:
+    - name: Install curl
+      yum:
+        name: curl
+        state: present
+
+    - name: Install nvm
+      shell: |
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+      args:
+        executable: /bin/bash
+        creates: /home/ec2-user/.nvm
+
+    - name: Load nvm
+      shell: |
+        export NVM_DIR="/home/ec2-user/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      args:
+        executable: /bin/bash
+
+    - name: Install Node.js
+      shell: |
+        nvm install --lts
+      args:
+        executable: /bin/bash
+
+    - name: Create users
+      user:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - arya
+        - sansa
+        - tirion
+      tags:
+        - create_users
+
