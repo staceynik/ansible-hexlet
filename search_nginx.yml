@@ -1,0 +1,7 @@
+- name: Execute command on remote server
+  hosts: ec2-204-236-209-242.compute-1.amazonaws.com
+  become: true
+  tasks:
+    - name: Check if Nginx package is available
+      command: sudo yum search nginx
+
