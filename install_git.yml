@@ -1,0 +1,7 @@
+- hosts: aws
+  gather_facts: no
+  tasks:
+    - name: Install Git
+      ansible.builtin.package:
+        name: git
+        state: present

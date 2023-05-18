@@ -1,0 +1,3 @@
+nginx_config_path: /home/server/ansible-hexlet/files/nginx.conf
+index_html_path: /home/server/ansible-hexlet/files/index.html
+
