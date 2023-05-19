@@ -1,0 +1,17 @@
+- hosts: aws
+  gather_facts: yes
+
+  tasks:
+    - name: Set dynamic service name
+      set_fact:
+        service_name: "web1"
+
+    - name: Set current date
+      set_fact:
+        current_date: "{{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+
+    - name: Create index.html file
+      ansible.builtin.template:
+        src: templates/index.html.j2
+        dest: /tmp/index.html
+
