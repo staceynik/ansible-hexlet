@@ -1,0 +1,33 @@
+---
+- name: Create user and install Git
+  hosts: aws, ubun
+  gather_facts: no
+
+  vars:
+    users:
+      - { name: admin, username: admin }
+      - { name: user, username: user }
+
+  tasks:
+    - name: Create users
+      ansible.builtin.user:
+        name: "{{ item.username }}"
+        state: present
+      loop: "{{ users }}"
+
+    - name: Install Git
+      ansible.builtin.package:
+        name: git
+        state: present
+
+    - name: Configure Git
+      ansible.builtin.copy:
+        dest: "/home/{{ item.username }}/.gitconfig"
+        content: |
+          [user]
+            name = Your Name
+            email = your.email@example.com
+        owner: "{{ item.username }}"
+        group: "{{ item.username }}"
+      loop: "{{ users }}"
+

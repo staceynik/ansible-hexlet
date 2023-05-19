@@ -1,0 +1,34 @@
+- hosts: aws
+  gather_facts: no
+
+  vars:
+    users:
+      - name: jaime
+        email: jaime@test.com
+      - name: sansa
+        email: sansa@test.com
+      - name: robert
+        email: robert@test.com
+
+  tasks:
+    - name: Create users
+      user:
+        name: "{{ item.name }}"
+        state: present
+      with_items: "{{ users }}"
+
+    - name: Create Git configuration file
+      template:
+        src: templates/gitconfig.j2
+        dest: "/home/{{ item.name }}/.gitconfig"
+        owner: "{{ item.name }}"
+        group: "{{ item.name }}"
+        mode: "0644"
+      with_items: "{{ users }}"
+
+    - name: Upload public SSH key
+      authorized_key:
+        user: "{{ item.name }}"
+        key: "{{ lookup('file', 'files/id_rsa.pub') }}"
+      with_items: "{{ users }}"
+
