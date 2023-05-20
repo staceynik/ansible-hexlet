@@ -1,0 +1,43 @@
+- hosts: ubun
+  gather_facts: yes
+
+  vars:
+    server_name: "{{ inventory_hostname }}"
+
+  tasks:
+    - name: Install cowsay package
+      ansible.builtin.package:
+        name: cowsay
+        state: present
+
+    - name: Run cowsay command
+      command: cowsay "This is server {{ server_name }}!"
+      register: cowsay_result
+
+    - name: Create files directory
+      ansible.builtin.file:
+        path: /home/server/ansible-hexlet/files
+        state: directory
+
+    - name: Set permissions for /home/server directory
+      ansible.builtin.file:
+        path: /home/server
+        owner: server
+        group: server
+        mode: "0755"
+
+    - name: Create index.html file
+      ansible.builtin.template:
+        src: templates/index.html.j2
+        dest: /home/server/ansible-hexlet/files/index.html
+
+    - name: Display cowsay result
+      ansible.builtin.debug:
+        msg: "{{ cowsay_result.stdout }}"
+
+    - name: Check cowsay result in HTML
+      ansible.builtin.lineinfile:
+        path: /home/server/ansible-hexlet/files/index.html
+        line: "<pre><code>{{ cowsay_result.stdout }}</code></pre>"
+        insertafter: "<h2>THIS IS SERVER {{ server_name }}!</h2>"
+

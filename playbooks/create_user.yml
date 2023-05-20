@@ -1,0 +1,9 @@
+- name: Add users with shells
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+    state: present
+  loop:
+    - { name: user1, shell: /bin/zsh }
+    - { name: user2, shell: /bin/bash }
+

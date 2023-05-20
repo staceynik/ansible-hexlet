@@ -1,0 +1,26 @@
+- name: Install Git
+  ansible.builtin.package:
+    name: git
+    state: present
+
+- name: Create myuser
+  ansible.builtin.user:
+    name: myuser
+    state: present
+
+- name: Create myuser directory
+  ansible.builtin.file:
+    path: /home/myuser
+    state: directory
+    mode: '0755'
+
+- name: Configure Git
+  ansible.builtin.copy:
+    dest: /home/myuser/.gitconfig
+    content: |
+      [user]
+        name = Your Name
+        email = your.email@example.com
+    owner: myuser
+    group: myuser
+
