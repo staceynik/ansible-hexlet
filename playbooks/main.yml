@@ -1,0 +1,14 @@
+- name: Main Playbook
+  hosts: ubun
+  gather_facts: yes
+
+  tasks:
+    - name: Include create_user tasks
+      include_tasks: create_user.yml
+
+    - name: Include install_git tasks
+      include_tasks: install_git.yml
+
+    - name: Include setup_workspace tasks
+      include_tasks: setup_workspace.yml
+
