@@ -1,0 +1,10 @@
+---
+- name: Ansible Vault Example
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Print secret key
+      debug:
+        msg: "{{ my_secret_key }}"
+
