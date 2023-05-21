@@ -31,6 +31,17 @@ This playbook sets up the workspace directory on the target servers. It creates 
 
 The main playbook that includes other playbooks. It orchestrates the execution of the individual playbooks and ensures that the necessary tasks are performed in the desired order.
 
+
+
+https://github.com/staceynik/ansible-hexlet/assets/48840427/62d77491-1829-45dd-b1d3-6c5cb7705965
+
+# Tools install playbooks
+
+## Description
+
+This playbook sets up the development environment for users, including the installation and configuration of essential tools such as Git. It automates the process of provisioning and configuring Git on target machines, enabling users to effectively manage version control and collaborate on GitHub repositories.
+
+
 ## Usage
 
 To execute the playbooks, use the following command:
@@ -42,10 +53,3 @@ Make sure to update the inventory file (`inventory.ini`) with your target hosts.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-
-
-https://github.com/staceynik/ansible-hexlet/assets/48840427/62d77491-1829-45dd-b1d3-6c5cb7705965
-
-
-
