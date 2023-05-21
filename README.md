@@ -29,6 +29,10 @@ This playbook sets up the development environment for users, including the insta
     roles: The directory containing the roles used in the playbook.
 
 
+https://github.com/staceynik/ansible-hexlet/assets/48840427/bad5ac72-493d-4ee4-89c9-a375ea57b47d
+
+
+
 ## Usage
 
 To execute the playbooks, use the following command:
