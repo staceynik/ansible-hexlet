@@ -1,0 +1,14 @@
+- name: Create User
+  ansible.builtin.user:
+    name: myuser
+    state: present
+
+- name: Add Git Config
+  ansible.builtin.copy:
+    src: /home/server/.gitconfig
+    dest: /home/myuser/.gitconfig
+    owner: myuser
+    group: myuser
+    mode: '0644'
+  when: true
+
